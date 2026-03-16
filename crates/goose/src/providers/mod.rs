@@ -24,6 +24,7 @@ pub mod gcpvertexai;
 pub mod gemini_cli;
 pub mod githubcopilot;
 pub mod google;
+pub mod groq;
 mod init;
 pub mod lead_worker;
 pub mod litellm;

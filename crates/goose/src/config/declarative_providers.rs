@@ -390,6 +390,16 @@ pub fn register_declarative_providers(
     let custom_providers = load_custom_providers(&dir)?;
     let fixed_providers = load_fixed_providers()?;
     for config in fixed_providers {
+        // Skip if a first-class provider is already registered under this name.
+        // First-class providers (groq.rs, xai.rs, etc.) take precedence over
+        // their declarative equivalents so Groq-specific features are preserved.
+        if registry.entries.contains_key(&config.name) {
+            tracing::debug!(
+                "Skipping declarative provider '{}' — already registered as a first-class provider",
+                config.name
+            );
+            continue;
+        }
         register_declarative_provider(registry, config, ProviderType::Declarative);
     }
 

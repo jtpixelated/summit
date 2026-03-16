@@ -2,6 +2,7 @@ use std::sync::{Arc, RwLock};
 
 use super::{
     anthropic::AnthropicProvider,
+    groq::GroqProvider,
     avian::AvianProvider,
     azure::AzureProvider,
     base::{Provider, ProviderMetadata},
@@ -64,6 +65,7 @@ async fn init_registry() -> RwLock<ProviderRegistry> {
         registry.register::<GeminiCliProvider>(false);
         registry.register::<GithubCopilotProvider>(false);
         registry.register::<GoogleProvider>(true);
+        registry.register::<GroqProvider>(true);
         registry.register::<LiteLLMProvider>(false);
         registry.register::<OllamaProvider>(true);
         registry.register::<OpenAiProvider>(true);
